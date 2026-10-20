@@ -13,10 +13,9 @@ namespace GrowthMomentReroll
     internal static class GmmsnCompatibility
     {
         private const string Owner = GrowthMomentRerollMod.HarmonyId + ".gmmsn";
-        private static readonly MethodInfo SetChoices = AccessTools.Method(typeof(ChoiceLetter_GrowthMoment), "TrySetChoices");
+        private static readonly MethodInfo SetChoices;
         private static readonly Func<Pawn, SkillDef, bool, bool> IsValidPassion;
-        internal static readonly AccessTools.FieldRef<ChoiceLetter_GrowthMoment, int> PassionCount =
-            AccessTools.FieldRefAccess<ChoiceLetter_GrowthMoment, int>("passionChoiceCount");
+        internal static readonly AccessTools.FieldRef<ChoiceLetter_GrowthMoment, int> PassionCount;
 
         internal static bool Active { get; }
         internal static bool Ready { get; }
@@ -29,13 +28,16 @@ namespace GrowthMomentReroll
 
         static GmmsnCompatibility()
         {
-            var type = AccessTools.TypeByName("Growth_Moments_Make_Sense_Now.HarmonyPatches");
-            Active = type != null;
+            Active = ModsConfig.IsActive("Jdalt.GMMSN");
             if (!Active) { Ready = true; return; }
             var harmony = new Harmony(Owner);
             MethodInfo target = null;
             try
             {
+                var type = Type.GetType("Growth_Moments_Make_Sense_Now.HarmonyPatches, GMMSN", throwOnError: false)
+                    ?? throw new InvalidOperationException("GMMSN compatibility type was not found.");
+                SetChoices = AccessTools.Method(typeof(ChoiceLetter_GrowthMoment), "TrySetChoices");
+                PassionCount = AccessTools.FieldRefAccess<ChoiceLetter_GrowthMoment, int>("passionChoiceCount");
                 // GMMSN also initializes on startup. Force its registration first,
                 // independent of which static constructor the game visits first.
                 RuntimeHelpers.RunClassConstructor(type.TypeHandle);

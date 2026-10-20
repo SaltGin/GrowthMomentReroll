@@ -32,7 +32,9 @@ namespace GrowthMomentReroll
 
             try
             {
-                if (!BgmCompatibility.TryGetSelections(letter, out var bgmPassions, out var bgmTraits))
+                List<SkillDef> bgmPassions = null;
+                List<Trait> bgmTraits = null;
+                if (BgmCompatibility.Active && !BgmCompatibility.TryGetSelections(letter, out bgmPassions, out bgmTraits))
                 {
                     Messages.Message("GMR_BgmUnsupported".Translate(), null, MessageTypeDefOf.RejectInput, historical: false);
                     return false;
