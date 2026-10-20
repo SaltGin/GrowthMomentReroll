@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GMR_ModName>儿童成长阶段重掷</GMR_ModName>
+  <GMR_Reroll>重掷</GMR_Reroll>
+  <GMR_Counts>剩余：{0} / {1} 次</GMR_Counts>
+  <GMR_RerollTooltip>重新随机生成全部特性和热情候选，消耗一次重掷机会。</GMR_RerollTooltip>
+  <GMR_SettingsExplanation>分别设置各成长评级的基础重掷次数。</GMR_SettingsExplanation>
+  <GMR_TierBudget>成长评级 {0}</GMR_TierBudget>
+  <GMR_OverflowStep>超过最高成长评级门槛后，每多少点额外获得一次重掷机会</GMR_OverflowStep>
+  <GMR_SettingsTiming>设置变更仅对新发生的成长事件生效。</GMR_SettingsTiming>
+  <GMR_ResetDefaults>恢复默认设置</GMR_ResetDefaults>
+  <GMR_RerollFailed>重掷失败，已保留原候选和剩余次数。详情请查看日志。</GMR_RerollFailed>
+  <GMR_BgmUnsupported>无法访问 Better Growth Moments 的临时勾选，已取消重掷，不消耗次数。</GMR_BgmUnsupported>
+  <GMR_GmmsnUnsupported>Growth Moments Make Sense Now 兼容适配未能初始化，重掷已禁用，详情请查看日志。</GMR_GmmsnUnsupported>
+  <GMR_QuotaUnavailable>当前信件仍有候选，但候选名额已丢失，可能由旧版 GMMSN 环境生成，无法可靠重掷。候选与次数未改变。</GMR_QuotaUnavailable>
+</LanguageData>

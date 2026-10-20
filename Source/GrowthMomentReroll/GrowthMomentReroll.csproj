@@ -1,0 +1,35 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- A .NET Framework 4.7.2 / RimWorld 1.6 baseline shared by 1.6 and 1.7. -->
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FrameworkReferencePath Condition="'$(FrameworkReferencePath)' == ''">$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2</FrameworkReferencePath>
+    <RimWorldReferencePath Condition="'$(RimWorldReferencePath)' == ''">$(UserProfile)\.nuget\packages\krafs.rimworld.ref\1.6.4871\ref\net472</RimWorldReferencePath>
+    <HarmonyReferencePath Condition="'$(HarmonyReferencePath)' == ''">C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\1.6\Assemblies\0Harmony.dll</HarmonyReferencePath>
+    <OutputPath>$(MSBuildThisFileDirectory)..\..\Assemblies\</OutputPath>
+    <AssemblyName>GrowthMomentReroll</AssemblyName>
+  </PropertyGroup>
+  <UsingTask TaskName="Csc" AssemblyFile="$(MSBuildToolsPath)\Roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="Compatibility\*.cs" />
+    <Reference Include="$(FrameworkReferencePath)\mscorlib.dll" />
+    <Reference Include="$(FrameworkReferencePath)\System.dll" />
+    <Reference Include="$(FrameworkReferencePath)\System.Core.dll" />
+    <Reference Include="$(RimWorldReferencePath)\netstandard.dll" />
+    <Reference Include="$(RimWorldReferencePath)\Assembly-CSharp.dll" />
+    <Reference Include="$(RimWorldReferencePath)\UnityEngine.CoreModule.dll" />
+    <Reference Include="$(RimWorldReferencePath)\UnityEngine.IMGUIModule.dll" />
+    <Reference Include="$(RimWorldReferencePath)\UnityEngine.TextRenderingModule.dll" />
+    <Reference Include="$(HarmonyReferencePath)" />
+  </ItemGroup>
+  <Target Name="Restore" />
+  <Target Name="Build">
+    <Error Condition="!Exists('$(FrameworkReferencePath)\mscorlib.dll')" Text="Set FrameworkReferencePath to the .NET Framework 4.7.2 reference directory." />
+    <Error Condition="!Exists('$(RimWorldReferencePath)\Assembly-CSharp.dll')" Text="Set RimWorldReferencePath to the RimWorld 1.6 reference directory." />
+    <Error Condition="!Exists('$(HarmonyReferencePath)')" Text="Set HarmonyReferencePath to the Harmony 1.6 DLL." />
+    <MakeDir Directories="$(OutputPath)" />
+    <Csc Sources="@(Compile)" References="@(Reference)" OutputAssembly="$(OutputPath)$(AssemblyName).dll"
+         TargetType="Library" NoStandardLib="true" NoConfig="true" LangVersion="9.0"
+         Optimize="true" Deterministic="true" WarningLevel="4" TreatWarningsAsErrors="true" />
+  </Target>
+</Project>
