@@ -11,7 +11,7 @@
   <GMR_RerollBudget>Reroll Counts</GMR_RerollBudget>
   <GMR_RerollTraits>Reroll traits</GMR_RerollTraits>
   <GMR_RerollPassions>Reroll skill passions</GMR_RerollPassions>
-  <GMR_RerollGenes>Reroll genes (including event chance)</GMR_RerollGenes>
+  <GMR_RerollGenes>Reroll genes</GMR_RerollGenes>
   <GMR_RerollPartsTiming>Content selection applies immediately. Each successful reroll costs one reroll, regardless of how many parts are selected.</GMR_RerollPartsTiming>
   <GMR_NoRerollParts>No selected candidates can be rerolled. Adjust the reroll content settings.</GMR_NoRerollParts>
   <GMR_SettingsExplanation>Set the base rerolls for each growth tier.</GMR_SettingsExplanation>
