@@ -28,15 +28,15 @@ namespace GrowthMomentReroll
         }
 
         internal static bool TryGetSelections(ChoiceLetter_GrowthMoment letter,
-            out List<SkillDef> passions, out List<Trait> traits)
+            out List<SkillDef> passions, out List<Trait> traits, bool needPassions = true, bool needTraits = true)
         {
             passions = null;
             traits = null;
-            if (selectedPassions == null || selectedTraits == null || lastLetter == null) return false;
+            if (lastLetter == null) return false;
             if (!ReferenceEquals(lastLetter.GetValue(null), letter)) return false;
-            passions = selectedPassions.GetValue(null) as List<SkillDef>;
-            traits = selectedTraits.GetValue(null) as List<Trait>;
-            return passions != null && traits != null;
+            if (needPassions) passions = selectedPassions?.GetValue(null) as List<SkillDef>;
+            if (needTraits) traits = selectedTraits?.GetValue(null) as List<Trait>;
+            return (!needPassions || passions != null) && (!needTraits || traits != null);
         }
     }
 }

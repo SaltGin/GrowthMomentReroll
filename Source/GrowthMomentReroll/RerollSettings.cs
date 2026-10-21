@@ -10,6 +10,7 @@ namespace GrowthMomentReroll
     {
         public int[] BaseRerolls = NewDefaults();
         public int OverflowStep = 5;
+        public bool RerollTraits = true, RerollPassions = true, RerollGenes = true;
 
         private readonly string[] tierBuffers = new string[9];
         private string stepBuffer;
@@ -26,6 +27,9 @@ namespace GrowthMomentReroll
                 Scribe_Values.Look(ref BaseRerolls[i], "tier" + i, defaultValue);
             }
             Scribe_Values.Look(ref OverflowStep, "overflowStep", 5);
+            Scribe_Values.Look(ref RerollTraits, "rerollTraits", true);
+            Scribe_Values.Look(ref RerollPassions, "rerollPassions", true);
+            Scribe_Values.Look(ref RerollGenes, "rerollGenes", true);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 for (int i = 0; i < BaseRerolls.Length; i++)
@@ -47,8 +51,15 @@ namespace GrowthMomentReroll
                 Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
                 var listing = new Listing_Standard { maxOneColumn = true };
                 listing.Begin(viewRect);
+                DrawSectionHeading(listing, "GMR_RerollParts".Translate());
+                listing.CheckboxLabeled("GMR_RerollTraits".Translate(), ref RerollTraits);
+                listing.CheckboxLabeled("GMR_RerollPassions".Translate(), ref RerollPassions);
+                if (AgeUpGenesCompatibility.Active)
+                    listing.CheckboxLabeled("GMR_RerollGenes".Translate(), ref RerollGenes);
+                listing.Label("GMR_RerollPartsTiming".Translate());
+                listing.Gap(16f);
+                DrawSectionHeading(listing, "GMR_RerollBudget".Translate());
                 listing.Label("GMR_SettingsExplanation".Translate());
-                listing.GapLine();
                 for (int i = 0; i < BaseRerolls.Length; i++)
                     DrawAdjustRow(listing, "GMR_TierBudget".Translate(i), ref BaseRerolls[i], ref tierBuffers[i], 0);
                 listing.GapLine();
@@ -62,6 +73,7 @@ namespace GrowthMomentReroll
                 {
                     BaseRerolls = NewDefaults();
                     OverflowStep = 5;
+                    RerollTraits = RerollPassions = RerollGenes = true;
                     Array.Clear(tierBuffers, 0, tierBuffers.Length);
                     stepBuffer = null;
                     GUI.FocusControl(null);
@@ -78,6 +90,15 @@ namespace GrowthMomentReroll
                 Text.Anchor = oldAnchor;
                 Text.WordWrap = oldWrap;
             }
+        }
+
+        private static void DrawSectionHeading(Listing_Standard listing, string label)
+        {
+            GameFont oldFont = Text.Font;
+            Text.Font = GameFont.Medium;
+            listing.Label(label);
+            Text.Font = oldFont;
+            listing.GapLine();
         }
 
         private static void DrawAdjustRow(Listing_Standard listing, string label, ref int value, ref string buffer, int min)

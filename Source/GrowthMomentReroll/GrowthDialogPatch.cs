@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -13,7 +14,9 @@ namespace GrowthMomentReroll
         private static void Postfix(Dialog_GrowthMomentChoices __instance, Rect inRect, ChoiceLetter_GrowthMoment ___letter)
         {
             var letter = ___letter;
-            if (!__instance.IsOpen || letter == null || letter.ArchiveView || !letter.ShowInfoTabs) return;
+            if (!__instance.IsOpen || letter == null || letter.ArchiveView) return;
+            var parts = RerollService.GetParts(letter);
+            if (!letter.ShowInfoTabs && parts == RerollParts.None) return;
             var state = LetterStates.EnsureInitialized(letter);
             GameFont oldFont = Text.Font;
             TextAnchor oldAnchor = Text.Anchor;
@@ -29,8 +32,8 @@ namespace GrowthMomentReroll
                 string caption = "GMR_Reroll".Translate();
                 float width = Mathf.Max(84f, Text.CalcSize(caption).x + 24f);
                 var button = new Rect(x, y, width, height);
-                bool usableQuotas = RerollService.HasUsableQuotas(letter);
-                bool canReroll = oldEnabled && state.Remaining > 0 && GmmsnCompatibility.Ready && usableQuotas;
+                string reason = RerollService.UnavailableReason(letter, parts);
+                bool canReroll = oldEnabled && state.Remaining > 0 && reason == null;
                 GUI.enabled = canReroll;
                 if (!canReroll) GUI.color = oldColor * Color.gray;
                 // The 1.7 GUI port does not consistently enforce GUI.enabled on buttons.
@@ -46,9 +49,7 @@ namespace GrowthMomentReroll
                 Text.WordWrap = false;
                 var counts = new Rect(button.xMax + 8f, y, 160f, height);
                 Widgets.Label(counts, "GMR_Counts".Translate(state.Remaining, state.Total));
-                string tooltipKey = !GmmsnCompatibility.Ready ? "GMR_GmmsnUnsupported"
-                    : !usableQuotas ? "GMR_QuotaUnavailable" : "GMR_RerollTooltip";
-                TooltipHandler.TipRegion(button, tooltipKey.Translate());
+                TooltipHandler.TipRegion(button, reason == null ? RerollTooltip(parts) : reason.Translate());
             }
             finally
             {
@@ -58,6 +59,15 @@ namespace GrowthMomentReroll
                 GUI.color = oldColor;
                 GUI.enabled = oldEnabled;
             }
+        }
+
+        internal static TaggedString RerollTooltip(RerollParts parts)
+        {
+            var names = new List<string>(3);
+            if ((parts & RerollParts.Traits) != 0) names.Add("GMR_CandidateTraits".Translate());
+            if ((parts & RerollParts.Passions) != 0) names.Add("GMR_CandidatePassions".Translate());
+            if ((parts & RerollParts.Genes) != 0) names.Add("GMR_CandidateGenes".Translate());
+            return "GMR_RerollTooltip".Translate(string.Join(", ", names));
         }
     }
 }

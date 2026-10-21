@@ -3,11 +3,21 @@
   <GMR_ModName>儿童成长阶段重掷</GMR_ModName>
   <GMR_Reroll>重掷</GMR_Reroll>
   <GMR_Counts>剩余：{0} / {1} 次</GMR_Counts>
-  <GMR_RerollTooltip>重新随机生成全部特性和热情候选，消耗一次重掷机会。</GMR_RerollTooltip>
+  <GMR_RerollTooltip>重新随机生成全部{0}候选，消耗一次重掷机会。</GMR_RerollTooltip>
+  <GMR_CandidateTraits>特性</GMR_CandidateTraits>
+  <GMR_CandidatePassions>技能热情</GMR_CandidatePassions>
+  <GMR_CandidateGenes>基因</GMR_CandidateGenes>
+  <GMR_RerollParts>重掷内容</GMR_RerollParts>
+  <GMR_RerollBudget>次数规则</GMR_RerollBudget>
+  <GMR_RerollTraits>重掷特性</GMR_RerollTraits>
+  <GMR_RerollPassions>重掷技能热情</GMR_RerollPassions>
+  <GMR_RerollGenes>重掷基因（含事件概率）</GMR_RerollGenes>
+  <GMR_RerollPartsTiming>内容选择立即生效。无论选择几部分，每次成功只消耗一次重掷机会。</GMR_RerollPartsTiming>
+  <GMR_NoRerollParts>当前没有已勾选且可重掷的候选。请调整重掷内容设置。</GMR_NoRerollParts>
   <GMR_SettingsExplanation>分别设置各成长评级的基础重掷次数。</GMR_SettingsExplanation>
   <GMR_TierBudget>成长评级 {0}</GMR_TierBudget>
   <GMR_OverflowStep>超过最高成长评级门槛后，每多少点额外获得一次重掷机会</GMR_OverflowStep>
-  <GMR_SettingsTiming>设置变更仅对新发生的成长事件生效。</GMR_SettingsTiming>
+  <GMR_SettingsTiming>次数和溢出设置的变更仅对新发生的成长事件生效。</GMR_SettingsTiming>
   <GMR_ResetDefaults>恢复默认设置</GMR_ResetDefaults>
   <GMR_RerollFailed>重掷失败，已保留原候选和剩余次数。详情请查看日志。</GMR_RerollFailed>
   <GMR_BgmUnsupported>无法访问 Better Growth Moments 的临时勾选，已取消重掷，不消耗次数。</GMR_BgmUnsupported>

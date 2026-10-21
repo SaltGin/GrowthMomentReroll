@@ -3,11 +3,21 @@
   <GMR_ModName>Growth Moment Reroll</GMR_ModName>
   <GMR_Reroll>Reroll</GMR_Reroll>
   <GMR_Counts>Left: {0} / {1}</GMR_Counts>
-  <GMR_RerollTooltip>Reroll all trait and passion candidates. Costs one reroll.</GMR_RerollTooltip>
+  <GMR_RerollTooltip>Reroll all {0} candidates. Costs one reroll.</GMR_RerollTooltip>
+  <GMR_CandidateTraits>trait</GMR_CandidateTraits>
+  <GMR_CandidatePassions>skill passion</GMR_CandidatePassions>
+  <GMR_CandidateGenes>gene</GMR_CandidateGenes>
+  <GMR_RerollParts>Reroll Content</GMR_RerollParts>
+  <GMR_RerollBudget>Reroll Counts</GMR_RerollBudget>
+  <GMR_RerollTraits>Reroll traits</GMR_RerollTraits>
+  <GMR_RerollPassions>Reroll skill passions</GMR_RerollPassions>
+  <GMR_RerollGenes>Reroll genes (including event chance)</GMR_RerollGenes>
+  <GMR_RerollPartsTiming>Content selection applies immediately. Each successful reroll costs one reroll, regardless of how many parts are selected.</GMR_RerollPartsTiming>
+  <GMR_NoRerollParts>No selected candidates can be rerolled. Adjust the reroll content settings.</GMR_NoRerollParts>
   <GMR_SettingsExplanation>Set the base rerolls for each growth tier.</GMR_SettingsExplanation>
   <GMR_TierBudget>Tier {0}</GMR_TierBudget>
   <GMR_OverflowStep>Growth points above the highest tier per extra reroll</GMR_OverflowStep>
-  <GMR_SettingsTiming>Setting changes only apply to new growth events.</GMR_SettingsTiming>
+  <GMR_SettingsTiming>Reroll count and overflow setting changes only apply to new growth events.</GMR_SettingsTiming>
   <GMR_ResetDefaults>Reset defaults</GMR_ResetDefaults>
   <GMR_RerollFailed>Could not reroll. The previous candidates and remaining rerolls were kept. See the log for details.</GMR_RerollFailed>
   <GMR_BgmUnsupported>Could not access Better Growth Moments' temporary selections. Reroll cancelled; no reroll was spent.</GMR_BgmUnsupported>

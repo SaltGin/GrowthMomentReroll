@@ -5,8 +5,8 @@ using UnityEngine;
 using Verse;
 
 [assembly: AssemblyTitle("Growth Moment Reroll")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.7.2")]
 [assembly: InternalsVisibleTo("GrowthMomentReroll.Tests")]
 
